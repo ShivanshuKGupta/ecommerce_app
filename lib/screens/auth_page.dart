@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/auth/auth_form.dart';
 import 'package:ecommerce_app/models/globals.dart';
-import 'package:ecommerce_app/screens/home_page.dart';
+import 'package:ecommerce_app/screens/main_page.dart';
 import 'package:ecommerce_app/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,27 @@ class AuthPage extends StatelessWidget {
       stream: auth.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return const HomePage();
+          currentUser.id = auth.currentUser!.email!;
+          return FutureBuilder(
+            builder: (context, snapshot) {
+              if (snapshot.connectionState != ConnectionState.done) {
+                return Scaffold(
+                  body: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Fetching user information...'),
+                        circularProgressIndicator(),
+                      ],
+                    ),
+                  ),
+                );
+              }
+              return const MainPage();
+            },
+            future: currentUser.fetch(),
+          );
         } else {
           return Scaffold(
             body: Center(

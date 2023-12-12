@@ -1,5 +1,7 @@
 import 'package:ecommerce_app/models/firestore/firestore_collection.dart';
 import 'package:ecommerce_app/models/firestore/firestore_document.dart';
+import 'package:ecommerce_app/models/globals.dart';
+import 'package:ecommerce_app/models/products/product.dart';
 
 class UserData extends FirestoreDocument {
   // The email and firestore id are the same for any user
@@ -12,6 +14,9 @@ class UserData extends FirestoreDocument {
   String? address;
   String? imgUrl;
   String? role;
+  List<String>? favorites;
+  List<String>? shopping;
+  List<String>? saved;
 
   UserData({
     super.id,
@@ -21,17 +26,6 @@ class UserData extends FirestoreDocument {
     this.imgUrl,
     this.role,
   }) : super(path: FirestoreCollection.users);
-
-  factory UserData.fromJson(Map<String, dynamic> json) {
-    return UserData(
-      id: json['email'] ?? json['id'],
-      name: json['name'],
-      phoneNumber: json['phoneNumber'],
-      address: json['address'],
-      imgUrl: json['imgUrl'],
-      role: json['role'],
-    );
-  }
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
@@ -43,15 +37,99 @@ class UserData extends FirestoreDocument {
     return json;
   }
 
+  void loadFromJson(Map<String, dynamic> json) {
+    id = json['email'] ?? json['id'] ?? id;
+    name = json['name'];
+    phoneNumber = json['phoneNumber'];
+    address = json['address'];
+    imgUrl = json['imgUrl'];
+    role = json['role'];
+  }
+
   @override
   Future<void> fetch() async {
     super.path = FirestoreCollection.users;
-    return super.fetch();
+    await super.fetch();
+    await getCartData();
+    loadFromJson(super.data);
   }
 
   @override
   Future<void> update() async {
     super.path = FirestoreCollection.users;
+    super.data = toJson();
     return super.update();
+  }
+
+  Future<FirestoreDocument> getCartData() async {
+    final cartData =
+        FirestoreDocument(path: FirestoreCollection.cart, id: currentUser.id);
+    await cartData.fetch();
+    favorites = cartData.data['favorites'] == null
+        ? []
+        : (cartData.data['favorites'] as List<dynamic>)
+            .map((e) => e.toString())
+            .toList();
+    shopping = cartData.data['shopping'] == null
+        ? []
+        : (cartData.data['shopping'] as List<dynamic>)
+            .map((e) => e.toString())
+            .toList();
+    saved = cartData.data['saved'] == null
+        ? []
+        : (cartData.data['saved'] as List<dynamic>)
+            .map((e) => e.toString())
+            .toList();
+    return cartData;
+  }
+
+  Future<List<Product>> fetchShoppingProducts() async {
+    final cartData = await getCartData();
+    final products = <Product>[];
+    for (final productID in shopping!) {
+      final product = Product(id: productID);
+      await product.fetch();
+      products.add(product);
+    }
+    return products;
+  }
+
+  Future<void> updateCartData() async {
+    final cartData =
+        FirestoreDocument(path: FirestoreCollection.cart, id: currentUser.id);
+    cartData.data['favorites'] = favorites;
+    cartData.data['shopping'] = shopping;
+    cartData.data['saved'] = saved;
+    await cartData.update();
+  }
+
+  Future<void> addRemoveToCart(String productID) async {
+    final cartData = await getCartData();
+    if (!shopping!.contains(productID)) {
+      shopping!.add(productID);
+    } else {
+      shopping!.remove(productID);
+    }
+    await updateCartData();
+  }
+
+  Future<void> addRemoveToSaved(String productID) async {
+    final cartData = await getCartData();
+    if (!saved!.contains(productID)) {
+      saved!.add(productID);
+    } else {
+      saved!.remove(productID);
+    }
+    await updateCartData();
+  }
+
+  Future<void> addRemoveToFavorites(String productID) async {
+    final cartData = await getCartData();
+    if (!favorites!.contains(productID)) {
+      favorites!.add(productID);
+    } else {
+      favorites!.remove(productID);
+    }
+    await updateCartData();
   }
 }

@@ -13,18 +13,22 @@ class DarkLightModeIconButton extends StatelessWidget {
               !(MediaQuery.of(context).platformBrightness == Brightness.dark);
         } else {
           if (MediaQuery.of(context).platformBrightness ==
-              (darkMode.value == true ? Brightness.dark : Brightness.light)) {
-            darkMode.value == null;
+              (darkMode.value! ? Brightness.dark : Brightness.light)) {
+            darkMode.value = null;
+          } else {
+            darkMode.value = !darkMode.value!;
           }
-          darkMode.value = !darkMode.value!;
         }
       },
-      icon: Icon(
-        darkMode.value == null
-            ? Icons.brightness_auto_rounded
-            : !darkMode.value!
-                ? Icons.light_mode_rounded
-                : Icons.dark_mode_rounded,
+      icon: ValueListenableBuilder(
+        valueListenable: darkMode,
+        builder: (context, value, child) => Icon(
+          darkMode.value == null
+              ? Icons.brightness_auto_rounded
+              : darkMode.value!
+                  ? Icons.dark_mode_rounded
+                  : Icons.light_mode_rounded,
+        ),
       ),
     );
   }

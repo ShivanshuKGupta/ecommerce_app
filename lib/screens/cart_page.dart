@@ -1,17 +1,18 @@
+import 'package:ecommerce_app/models/globals.dart';
 import 'package:ecommerce_app/models/products/product.dart';
 import 'package:ecommerce_app/utils/dark_light_mode_icon_button.dart';
 import 'package:ecommerce_app/utils/product_tile.dart';
 import 'package:ecommerce_app/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class CartPage extends StatefulWidget {
+  const CartPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<CartPage> createState() => _CartPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _CartPageState extends State<CartPage> {
   List<Product> products = [];
 
   @override
@@ -19,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     bool gridView = false;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Catalog'),
+        title: const Text('Your Shopping Cart'),
         actions: const [
           DarkLightModeIconButton(),
         ],
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: FutureBuilder(
           key: UniqueKey(),
-          future: fetchProducts(),
+          future: currentUser.fetchShoppingProducts(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Center(child: circularProgressIndicator());

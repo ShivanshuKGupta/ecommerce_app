@@ -1,4 +1,3 @@
-import 'package:ecommerce_app/main.dart';
 import 'package:ecommerce_app/models/globals.dart';
 
 class FirestoreDocument {
@@ -16,7 +15,7 @@ class FirestoreDocument {
 
   // this fetches the document from firestore
   Future<void> fetch() async {
-    print("Fetch Firestore Doc: $path/$id");
+    print("Fetch Firestore Doc: $path$id");
     assert(path != null);
     assert(id.isNotEmpty);
     path = path!.replaceAll(' ', '');

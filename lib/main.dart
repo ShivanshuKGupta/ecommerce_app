@@ -50,7 +50,8 @@ class MyApp extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: darkMode,
       builder: (context, value, child) {
-        value ??= MediaQuery.of(context).platformBrightness == Brightness.dark;
+        value ??=
+            (MediaQuery.of(context).platformBrightness == Brightness.dark);
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Hustle Stay',
@@ -58,7 +59,7 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
             colorScheme: ColorScheme.fromSeed(
               brightness: value ? Brightness.dark : Brightness.light,
-              seedColor: Colors.cyan,
+              seedColor: Colors.purple,
             ),
             textTheme: GoogleFonts.quicksandTextTheme().apply(
               bodyColor: value ? Colors.white : Colors.black,
