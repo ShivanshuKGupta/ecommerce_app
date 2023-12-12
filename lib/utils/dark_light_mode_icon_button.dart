@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/models/globals.dart';
 import 'package:ecommerce_app/providers/settings.dart';
 import 'package:flutter/material.dart';
 
@@ -9,14 +10,14 @@ class DarkLightModeIconButton extends StatelessWidget {
     return IconButton(
       onPressed: () {
         if (darkMode.value == null) {
-          darkMode.value =
+          settings.theme =
               !(MediaQuery.of(context).platformBrightness == Brightness.dark);
         } else {
           if (MediaQuery.of(context).platformBrightness ==
               (darkMode.value! ? Brightness.dark : Brightness.light)) {
-            darkMode.value = null;
+            settings.theme = null;
           } else {
-            darkMode.value = !darkMode.value!;
+            settings.theme = !darkMode.value!;
           }
         }
       },

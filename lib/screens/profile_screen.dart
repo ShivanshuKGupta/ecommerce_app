@@ -1,0 +1,12 @@
+import 'package:ecommerce_app/models/globals.dart';
+import 'package:ecommerce_app/user/profile_details_screen.dart';
+import 'package:flutter/material.dart';
+
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ProfileDetailsScreen(user: currentUser);
+  }
+}

@@ -7,10 +7,12 @@ import 'package:flutter/material.dart';
 class ProductTile extends StatelessWidget {
   final bool showDetails;
   final Product product;
+  final bool showDetailsPage;
   const ProductTile({
     super.key,
     required this.product,
     this.showDetails = true,
+    this.showDetailsPage = true,
   });
 
   @override
@@ -31,17 +33,21 @@ class ProductTile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: GestureDetector(
-                onTap: () {
-                  navigatorPush(context, ProductScreen(product: product));
-                },
+                onTap: showDetailsPage
+                    ? () {
+                        navigatorPush(context, ProductScreen(product: product));
+                      }
+                    : null,
                 child: (product.imgUrl == null)
                     ? const Icon(
                         Icons.shopping_cart,
                         size: 200,
                       )
-                    : CachedNetworkImage(
-                        imageUrl: product.imgUrl!,
-                        fit: BoxFit.contain,
+                    : InteractiveViewer(
+                        child: CachedNetworkImage(
+                          imageUrl: product.imgUrl!,
+                          fit: BoxFit.contain,
+                        ),
                       ),
               ),
             ),

@@ -69,7 +69,6 @@ class _EditProfileState extends State<EditProfile> {
                 Section(title: 'Personal Information', children: [
                   TextFormField(
                     maxLength: 50,
-                    enabled: false,
                     decoration: const InputDecoration(
                       label: Text("Name"),
                     ),

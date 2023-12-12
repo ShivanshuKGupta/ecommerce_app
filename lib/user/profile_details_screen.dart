@@ -34,6 +34,9 @@ class ProfileDetailsScreen extends StatelessWidget {
               ProfilePreview(
                 user: user,
                 showDetailsPage: false,
+                showCallButton: user.id != currentUser.id,
+                showChatButton: user.id != currentUser.id,
+                showMailButton: user.id != currentUser.id,
               ),
               const Divider(),
               Section(

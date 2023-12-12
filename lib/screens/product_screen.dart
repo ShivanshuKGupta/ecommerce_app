@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/models/globals.dart';
 import 'package:ecommerce_app/models/products/product.dart';
+import 'package:ecommerce_app/utils/image_preview.dart';
 import 'package:ecommerce_app/utils/loading_elevated_button.dart';
 import 'package:ecommerce_app/utils/loading_icon_button.dart';
 import 'package:ecommerce_app/utils/product_tile.dart';
@@ -63,8 +64,25 @@ class _ProductScreenState extends State<ProductScreen> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.5,
                   width: MediaQuery.of(context).size.width,
-                  child:
-                      ProductTile(product: widget.product, showDetails: false),
+                  child: GestureDetector(
+                      onTap: () {
+                        navigatorPush(
+                          context,
+                          ImagePreview(
+                            image: ProductTile(
+                              showDetailsPage: false,
+                              product: widget.product,
+                              showDetails: false,
+                            ),
+                          ),
+                        );
+                      },
+                      child: InteractiveViewer(
+                          child: ProductTile(
+                        showDetailsPage: false,
+                        product: widget.product,
+                        showDetails: false,
+                      ))),
                 ),
               const SizedBox(
                 height: 20,

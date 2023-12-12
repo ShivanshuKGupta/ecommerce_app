@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/screens/cart_page.dart';
 import 'package:ecommerce_app/screens/home_page.dart';
+import 'package:ecommerce_app/screens/profile_screen.dart';
 import 'package:ecommerce_app/screens/search_page.dart';
 import 'package:ecommerce_app/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -29,14 +30,7 @@ class _MainPageState extends State<MainPage> {
           setState(() {});
         },
         controller: _pageController,
-        children: const [
-          HomePage(),
-          SearchPage(),
-          CartPage(),
-          Center(
-            child: Text('Profile'),
-          ),
-        ],
+        children: const [HomePage(), SearchPage(), CartPage(), ProfileScreen()],
       ),
       extendBody: true,
       bottomNavigationBar: GlassWidget(

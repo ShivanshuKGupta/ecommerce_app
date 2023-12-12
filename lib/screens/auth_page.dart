@@ -32,7 +32,10 @@ class AuthPage extends StatelessWidget {
               }
               return const MainPage();
             },
-            future: currentUser.fetch(),
+            future: () async {
+              if (currentUser.name == null) await currentUser.fetch();
+              return;
+            }(),
           );
         } else {
           return Scaffold(
