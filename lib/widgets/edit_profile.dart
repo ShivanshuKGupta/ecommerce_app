@@ -2,12 +2,11 @@ import 'dart:io';
 
 import 'package:ecommerce_app/models/user/user.dart';
 import 'package:ecommerce_app/providers/image.dart';
-import 'package:ecommerce_app/utils/profile_image.dart';
-import 'package:ecommerce_app/utils/section.dart';
 import 'package:ecommerce_app/utils/utils.dart';
+import 'package:ecommerce_app/widgets/loading_elevated_button.dart';
+import 'package:ecommerce_app/widgets/profile_image.dart';
+import 'package:ecommerce_app/widgets/section.dart';
 import 'package:flutter/material.dart';
-
-import 'loading_elevated_button.dart';
 
 class EditProfile extends StatefulWidget {
   EditProfile({super.key, UserData? user}) {

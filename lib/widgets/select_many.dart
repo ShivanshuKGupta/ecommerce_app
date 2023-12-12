@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/utils/select_one_tile.dart';
+import 'package:ecommerce_app/widgets/select_one_tile.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

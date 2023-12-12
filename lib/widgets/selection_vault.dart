@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/utils/vault_tile.dart';
+import 'package:ecommerce_app/widgets/vault_tile.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

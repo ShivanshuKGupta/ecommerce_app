@@ -1,7 +1,6 @@
 import 'package:ecommerce_app/screens/cart_page.dart';
 import 'package:ecommerce_app/screens/home_page.dart';
 import 'package:ecommerce_app/screens/profile_screen.dart';
-import 'package:ecommerce_app/screens/search_page.dart';
 import 'package:ecommerce_app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -30,7 +29,7 @@ class _MainPageState extends State<MainPage> {
           setState(() {});
         },
         controller: _pageController,
-        children: const [HomePage(), SearchPage(), CartPage(), ProfileScreen()],
+        children: const [HomePage(), CartPage(), ProfileScreen()],
       ),
       extendBody: true,
       bottomNavigationBar: GlassWidget(
@@ -65,10 +64,6 @@ class _MainPageState extends State<MainPage> {
             GButton(
               icon: Icons.home_rounded,
               text: 'Home',
-            ),
-            GButton(
-              icon: Icons.search_rounded,
-              text: 'Search',
             ),
             GButton(
               icon: Icons.shopping_cart_rounded,

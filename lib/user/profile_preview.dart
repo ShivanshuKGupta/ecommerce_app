@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_app/models/user/user.dart';
 import 'package:ecommerce_app/user/profile_details_screen.dart';
-import 'package:ecommerce_app/utils/image_preview.dart';
 import 'package:ecommerce_app/utils/utils.dart';
+import 'package:ecommerce_app/widgets/image_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

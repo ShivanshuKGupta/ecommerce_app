@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/models/globals.dart';
-import 'package:ecommerce_app/utils/loading_elevated_button.dart';
 import 'package:ecommerce_app/utils/utils.dart';
+import 'package:ecommerce_app/widgets/loading_elevated_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

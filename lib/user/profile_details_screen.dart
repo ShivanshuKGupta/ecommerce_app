@@ -1,14 +1,15 @@
 import 'package:ecommerce_app/models/globals.dart';
 import 'package:ecommerce_app/models/user/user.dart';
 import 'package:ecommerce_app/user/profile_preview.dart';
-import 'package:ecommerce_app/utils/edit_profile.dart';
-import 'package:ecommerce_app/utils/section.dart';
 import 'package:ecommerce_app/utils/utils.dart';
+import 'package:ecommerce_app/widgets/edit_profile.dart';
+import 'package:ecommerce_app/widgets/section.dart';
 import 'package:flutter/material.dart';
 
 class ProfileDetailsScreen extends StatelessWidget {
   final UserData user;
-  const ProfileDetailsScreen({super.key, required this.user});
+  final void Function()? onEdit;
+  const ProfileDetailsScreen({super.key, required this.user, this.onEdit});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +18,10 @@ class ProfileDetailsScreen extends StatelessWidget {
         actions: [
           if (user.email == currentUser.email)
             IconButton(
-              onPressed: () {
-                navigatorPush(context, EditProfile(user: user));
-              },
+              onPressed: onEdit ??
+                  () {
+                    navigatorPush(context, EditProfile(user: user));
+                  },
               icon: const Icon(
                 Icons.edit_rounded,
               ),

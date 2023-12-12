@@ -1,9 +1,9 @@
 import 'package:ecommerce_app/models/globals.dart';
 import 'package:ecommerce_app/models/products/product.dart';
-import 'package:ecommerce_app/utils/dark_light_mode_icon_button.dart';
-import 'package:ecommerce_app/utils/loading_elevated_button.dart';
-import 'package:ecommerce_app/utils/product_tile.dart';
 import 'package:ecommerce_app/utils/utils.dart';
+import 'package:ecommerce_app/widgets/dark_light_mode_icon_button.dart';
+import 'package:ecommerce_app/widgets/loading_elevated_button.dart';
+import 'package:ecommerce_app/widgets/product_tile.dart';
 import 'package:flutter/material.dart';
 
 class CartPage extends StatefulWidget {
@@ -18,7 +18,6 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    bool gridView = false;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your Shopping Cart'),
