@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ecommerce_app/models/globals.dart';
 import 'package:ecommerce_app/models/user/user.dart';
 import 'package:ecommerce_app/providers/image.dart';
 import 'package:ecommerce_app/utils/utils.dart';
@@ -41,7 +42,17 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          if (widget.user.id == currentUser.id)
+            IconButton(
+              onPressed: () async {
+                await auth.signOut();
+              },
+              icon: const Icon(Icons.logout),
+            ),
+        ],
+      ),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(

@@ -1,28 +1,30 @@
 import 'package:ecommerce_app/models/globals.dart';
 import 'package:ecommerce_app/models/products/product.dart';
+import 'package:ecommerce_app/providers/cart.dart';
 import 'package:ecommerce_app/utils/utils.dart';
-import 'package:ecommerce_app/widgets/dark_light_mode_icon_button.dart';
 import 'package:ecommerce_app/widgets/loading_elevated_button.dart';
 import 'package:ecommerce_app/widgets/product_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CartPage extends StatefulWidget {
+class CartPage extends ConsumerStatefulWidget {
   const CartPage({super.key});
 
   @override
-  State<CartPage> createState() => _CartPageState();
+  ConsumerState<CartPage> createState() => _CartPageState();
 }
 
-class _CartPageState extends State<CartPage> {
+class _CartPageState extends ConsumerState<CartPage> {
   List<Product> products = [];
 
   @override
   Widget build(BuildContext context) {
+    final watch = ref.watch(ShoppingListProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your Shopping Cart'),
         actions: const [
-          DarkLightModeIconButton(),
+          // DarkLightModeIconButton(),
         ],
       ),
       body: SafeArea(

@@ -1,21 +1,23 @@
 import 'package:ecommerce_app/models/globals.dart';
 import 'package:ecommerce_app/models/products/product.dart';
+import 'package:ecommerce_app/providers/cart.dart';
 import 'package:ecommerce_app/utils/utils.dart';
 import 'package:ecommerce_app/widgets/image_preview.dart';
 import 'package:ecommerce_app/widgets/loading_elevated_button.dart';
 import 'package:ecommerce_app/widgets/loading_icon_button.dart';
 import 'package:ecommerce_app/widgets/product_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ProductScreen extends StatefulWidget {
+class ProductScreen extends ConsumerStatefulWidget {
   final Product product;
   const ProductScreen({super.key, required this.product});
 
   @override
-  State<ProductScreen> createState() => _ProductScreenState();
+  ConsumerState<ProductScreen> createState() => _ProductScreenState();
 }
 
-class _ProductScreenState extends State<ProductScreen> {
+class _ProductScreenState extends ConsumerState<ProductScreen> {
   late bool isFavorite;
   late bool isSaved;
   late bool isShopping;
@@ -167,6 +169,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 setState(() {
                   isShopping = !isShopping;
                 });
+                ref.read(ShoppingListProvider.notifier).notifyListeners();
               },
               label: Text(isShopping ? 'Remove from Cart' : 'Add to Cart'),
               icon: Icon(isShopping

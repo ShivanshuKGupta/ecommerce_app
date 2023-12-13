@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Catalog'),
+        title: const Text('Product Catalog'),
         actions: const [
           DarkLightModeIconButton(),
         ],

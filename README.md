@@ -1,16 +1,7 @@
-# ecommerce_app
+# How to run
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Just run ```flutter pub get```
+2. Run ```flutterfire configure``` and assign a new firebase project to it, with signinwithemail(auth), firestore(in test mode) and storage(in test mode) enabled.
+3. Finally, run the flutter android app on your mobile phone.
+4. I have also sent a build apk for reference.
+5. Just login with this email id: ```shivanshukgupta@gmail.com``` and password: ```123456```.

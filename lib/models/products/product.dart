@@ -51,10 +51,11 @@ class Product extends FirestoreDocument {
   }
 
   @override
-  Future<void> fetch() async {
+  Future<Product> fetch() async {
     super.path = FirestoreCollection.products;
     await super.fetch();
     loadFromJson(super.data);
+    return this;
   }
 
   @override

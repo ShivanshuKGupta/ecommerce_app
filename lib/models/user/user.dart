@@ -85,12 +85,12 @@ class UserData extends FirestoreDocument {
 
   Future<List<Product>> fetchShoppingProducts() async {
     final cartData = await getCartData();
-    final products = <Product>[];
-    for (final productID in shopping!) {
+    final List<Future<Product>> productFutures = shopping!.map((productID) {
       final product = Product(id: productID);
-      await product.fetch();
-      products.add(product);
-    }
+      return product.fetch();
+      // return product;
+    }).toList();
+    final List<Product> products = await Future.wait(productFutures);
     return products;
   }
 
